@@ -4,33 +4,10 @@ With the provided files the open source requirements management system [doorstop
 
 
 ## how to run doorstop container
-You can either use the prebuilt image or build it yourself
-
-### Option 1 - use prebuilt image
+make sure that you have a `data` directory under the directory from where you are calling this command (or you adapt the run command). The directory is then available at `/data`
 
 ```
-docker run tlwt/doorstop
+docker run --name doorstop --rm \
+    -v "$(pwd)/data:/data" \
+    -i -t tlwt/doorstop
 ```
-
-### Option 2 - build it yourself
-
-Step 1 - clone this repository to your machine
-
-```
-git clone https://github.com/tlwt/doorstop-docker.git
-```
-
-Step 2 - make scripts executable
-
-```
-chmod 755 dockerBuild.sh dockerRun.sh
-```
-
-Step 3 - build the docker image by running
-
-```
-./dockerBuild
-```
-
-Step 4 - execute the container
-./dockerRun

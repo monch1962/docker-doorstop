@@ -13,4 +13,6 @@ RUN git clone https://github.com/jacebrowning/doorstop.git
 WORKDIR /app/doorstop
 RUN python3 setup.py install
 
+WORKDIR /data
+
 ENTRYPOINT /bin/bash
