@@ -3,7 +3,12 @@
 With the provided files the open source requirements management system [doorstop](https://doorstop.readthedocs.io) runs in Docker
 
 ## How to build & run the doorstop container
-make sure that you have a `data` directory under the directory from where you are calling this command (or you adapt the run command). The directory is then available at `/data`
+
+To build the container image, just run `$ ./dockerBuild.sh`. Assuming you have a Docker server running, this will create a Docker image `doorstop_image:latest` that you can use. You can optionally store this image to a Docker registry if you want to maintain the integrity of your software supply chain.
+
+To get this to work in the out-of-the-box config, make sure that you have a `data` directory under the directory from where you are calling this command (or you adapt the run command). The directory is then available at `/data`. You can then run `$ ./dockerRun.sh` to start the container and drop you into a bash shell inside the container. You can then run `doorstop` from the bash shell inside the container.
+
+You may wish to run this container to create &/or maintain requirements that are maintained inside another repo. In this case, edit `./dockerRun.sh` so that it mounts the directory holding those requirements into `/data` for the container. You can then run the container, use it to maintain the requirements in your mounted directory, then push & merge those requirements to the repo once you've finished. This is probably the logical way to use this container
 
 # Instructions to build & run the image
 
@@ -62,7 +67,7 @@ attributes:
       - other
 ```
 
-To add an execution approach & a JIRA URL to the test case template, you could edit `./rq/tsc/tc/.doorstop.yml` to look like this:
+To add an execution approach & a JIRA URL to the test case template, you could edit `./req/tsc/tc/.doorstop.yml` to look like this:
 ```
 settings:
   digits: "5"
