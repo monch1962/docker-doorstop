@@ -20,7 +20,87 @@ To run it, first clone your repo, then create a new directory to hold the doorst
 - `$ cd repo-name` to get to the top directory of the repo
 - `$ mkdir ./doorstop` to create the directory to hold the doorstop documents you're going to create
 
+## Setting up your hierarchy
 
+Let's assume you want to set up and track the following dependencies:
+- solution requirements documents `REQ` will be the root of your hierarchy; every other type of document will tie back to the solution requirements documents
+  - you want to support >1000 distinct requirements 
+- solution design documents `SDD` will link to the `REQ` documents to allow the design to be tracked against requirements
+- high level testing documents `TSC` will also link to the `REQ` documents to allow test scenarios to be tracked against requirements
+- source control documents `SC` will link to the `SDD` documents to allow implementation to be traced against the solution design
+- test case documents `TC` will link to the `TSC` documents to allow individual test cases to be tracked against test scenarios
+
+To set this up, execute the following commands:
+- `$ git init`
+- `$ doorstop create -d 4 -s - REQ ./req`
+- `$ doorstop create -d 5 -s - SDD ./req/sdd --parent REQ`
+- `$ doorstop create -d 5 -s - TSC ./req/tsc --parent REQ`
+- `$ doorstop create -d 5 -s - TC ./req/tsc/tc --parent TSC`
+
+Before you go any further and start creating requirements & test cases, you might want to stop at this point and add any extra attributes to the various YAML templates you've just created. 
+
+To add categories and requirements source to the requirements template, you could edit `./req/.doorstop.yml` to look like this:
+```
+settings:
+  digits: "4"
+  prefix: REQ
+  sep: "-"
+attributes:
+  defaults:
+    categories:
+      - functional
+      - usability
+      - reliability
+      - performance
+      - security
+      - constraint
+    source:
+      - customer
+      - regulator
+      - internal dependency
+      - 3rd-party dependency
+      - other
+```
+
+To add an execution approach & a JIRA URL to the test case template, you could edit `./rq/tsc/tc/.doorstop.yml` to look like this:
+```
+settings:
+  digits: "5"
+  parent: REQ
+  prefix: TC
+  sep: "-"
+attributes:
+  defaults:
+    execution-approach:
+      - automated
+      - manual
+      - architecture-review
+      - design-review
+      - code-review
+      - unknown
+    jira-url:
+```
+
+Now you've got your templates set up, it's time to add your first requirement and edit the text description
+- `$ doorstop add REQ`
+- `$ doorstop edit REQ1`
+
+Now you can create a test case, edit the description and link it to the requirement you just created
+- `$ doorstop add TC`
+- `$ doorstop edit TC1`
+- `$ doorstop link TC1 REQ1`
+
+You can add more requirements using `$ doorstop add REQ` as many times as you like. Each requirement will be numbered sequentially going up from 1. You can edit e.g. requirement 8 using `$ doorstop edit REQ8` (no need to worry about leading zeroes)
+
+Similarly you can add more testcases using `$doorstop add TC` as many times as you like. You can also edit e.g. test case 13 using `$ doorstop edit TC13`.
+
+Finally you can link TC13 to REQ8 using `$doorstop link TC13 REQ8`. You can link each test case to any number of requirements by typing e.g. `$ doorstop link TC9 REQ3`, `$ doorstop link TC9 REQ7`.
+
+
+- `$ doorstop create -d 5 -s - HLT ./req/high-level-tests --parent REQ`
+- `$ doorstop add HLT`
+- `$ doorstop link HLT1 REQ1`
+- `$ doorstop create -d 5 -s - SC ./req/source-control --parent REQ`
 
 
 ## Editor
@@ -53,5 +133,4 @@ You should be able to navigate around by clicking on links in that page
 ---
 
 ## TO-DOs
-
 - investigate integration with https://github.com/sevendays/doorhole which looks like a nice GUI for rapid data entry and editing
