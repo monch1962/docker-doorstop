@@ -1,5 +1,6 @@
 #Download base image ubuntu 16.10
-FROM ubuntu:16.10
+#FROM ubuntu:16.10
+FROM python:3.10-bullseye
 
 # update Ubuntu Software repository
 RUN apt-get update
