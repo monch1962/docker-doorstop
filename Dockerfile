@@ -2,18 +2,10 @@
 #FROM ubuntu:16.10
 FROM python:3.10-bullseye
 
-# update Ubuntu Software repository
-RUN apt-get update
-
-# installing command line tools
-RUN apt-get -y install nano less git python3 python3-pip
-
 WORKDIR /app
-RUN git clone https://github.com/jacebrowning/doorstop.git
-
-WORKDIR /app/doorstop
-RUN python3 setup.py install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /data
 
-ENTRYPOINT /bin/bash
+ENTRYPOINT ["/bin/bash"]
