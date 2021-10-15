@@ -16,6 +16,7 @@ plantuml-markdown==3.4.3
 pyficache==0.3.2
 Pygments==2.10.0
 pyparsing==2.4.7
+pystache==0.5.4
 python-markdown-math==0.6
 PyYAML==5.4.1
 requests==2.26.0
