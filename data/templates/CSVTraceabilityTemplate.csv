@@ -1,0 +1,9 @@
+"ID"{{{csvSeparator}}}"Section"{{{csvSeparator}}}"Heading"{{{csvSeparator}}}"Text"{{{csvSeparator}}}"Is Referenced By"{{{csvSeparator}}}"References"
+{{#eachDocumentObject}}
+  {{~{formatAttributeCSVColumn "id"}}}{{{csvSeparator}}}
+  {{~{formatCSVColumn (sectionNumber)}}}{{{csvSeparator}}}
+  {{~{formatAttributeCSVColumn "heading"}}}{{{csvSeparator}}}
+  {{~{formatAttributeCSVColumn "text"}}}{{{csvSeparator}}}
+  {{~#formatBlockCSVColumn}}{{#eachInlinkWith type="reference" separator=" "}}{{{docId}}}-{{{id}}}{{/eachInlinkWith}}{{/formatBlockCSVColumn}}{{{csvSeparator}}}
+  {{~#formatBlockCSVColumn}}{{#eachOutlinkWith type="reference" separator=" "}}{{{docId}}}-{{{id}}}{{/eachOutlinkWith}}{{/formatBlockCSVColumn}}
+{{/eachDocumentObject}}

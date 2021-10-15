@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ReqView SRS Traceability Report</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <style>
+    /* Customization of standard HTML styles */
+    p {
+      margin-top: 0em;
+      margin-bottom: 0.5em;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0em;
+      margin-bottom: 0.25em;
+    }
+    table {
+      border-spacing: 1em;
+    }
+    th, td {
+      text-align: left;
+    }
+
+    /* Customization of ReqView styles */
+    #heading {
+      margin: 1em;
+      margin-top: 2em;
+    }
+    #filter {
+      text-align: right;
+      margin: 1em;
+    }
+    #reqviewTable {
+      margin: 1em;
+    }
+    #reqviewTable h1 {
+      font-size: 30px;
+    }
+    #reqviewTable h2 {
+      font-size: 24px;
+    }
+    #reqviewTable h3 {
+      font-size: 20px;
+    }
+    #reqviewTable h4 {
+      font-size: 18px;
+    }
+    #reqviewTable h5 {
+      font-size: 16px;
+    }
+    #reqviewTable h6 {
+      font-size: 14px;
+    }
+    /* Customization of our styles */
+    .id-col {
+      min-width: 6em;
+    }
+    /** Customization of description column */
+    .description-col {
+      min-width: 30em;
+      vertical-align: top;
+    }
+    .attachment {
+      font-style: italic;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+    /* Customization of embedded tables */
+    .htmlContent table {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: auto;
+    }
+    .htmlContent th, .htmlContent td {
+      border: 1px solid #b5bcc7;
+      vertical-align: top;
+      padding: 3px 7px 2px 7px;
+    }
+    .htmlContent th {
+      padding-top: 5px;
+      padding-bottom: 4px;
+      background: silver;
+    }
+    /** Customization of traceability columns */
+    .links-col {
+      min-width: 15em;
+      width: 30%;
+      vertical-align: top;
+    }
+    .links-type-name {
+      font-style: italic;
+    }
+    .link {
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
+    .link-attr {
+      margin-left: 5px;
+      margin-bottom: 5px;
+      float: right;
+      font-weight: bold;
+    }
+    .highlight {
+      background-color: rgba(230, 230, 230, 0.5);
+    }
+    .doc-obj-id {
+      font-weight: bold;
+    }
+    .needs-acceptance {
+      margin-left: 10px;
+    }
+    .deleted {
+      color: #666;
+    }
+    .deleted .id-col,
+    .link.deleted {
+      text-decoration: line-through;
+    }
+    .deleted a {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <div id="heading">
+    <h1>ReqView SRS Traceability Report</h1>
+  </div>
+  <div id="filter">
+    <i class="fas fa-filter"></i>{{filter}}
+  </div>
+  <div id="reqviewTable">
+    <table id="reqsTable" class="table">
+      <!-- Heading of the requirements table -->
+      <thead>
+        <tr>
+          <th class="links-col">Satisfied Needs</th>
+          <th class="id-col highlight">ID</th>
+          <th class="description-col highlight">Description</th>
+          <th class="status-col highlight">Status</th>
+          <th class="links-col">Verified by Tests</th>
+        </tr>
+      </thead>
+
+      <!-- Requirements table with list of requirements -->
+      <tbody>
+        {{#eachDocumentObject}}
+        <tr{{#if deleted}} class="deleted"{{/if}}>
+          {{!-- Satisfaction Links to NEEDS --}}
+          <td class="links-col">
+            {{#eachOutlinkWith type="satisfaction"}}
+              <div class="link">
+                <div class="needs-description">
+                  <i class='fas fa-caret-left'></i> <span class="doc-obj-id">{{docObjId}}</span> {{#ifSuspect}}<span class="suspect-flag"><i class="fas fa-exclamation-circle"></i></span>{{/ifSuspect}} <strong>{{shortDescription maxLength=40}}</strong>
+                </div>
+                <div class="needs-acceptance">{{{acceptanceCriteria}}}</div>
+              </div>
+            {{/eachOutlinkWith}}
+          </td>
+          {{!-- ID --}}
+          <td class="id-col highlight"><span class="doc-obj-id">{{docObjId}}</span>{{#if deleted}} <i class="fas fa-trash-alt"></i>{{/if}}</td>
+          {{!-- Description --}}
+          <td class="description-col highlight" style="padding-left:{{indentation 10}}">
+            {{#section numbering=true}}{{heading}}{{/section}}
+            <div class="htmlContent">{{{text}}}</div>
+            {{#eachAttachment}}
+              <div class="attachment">
+                {{#if isImage}}
+                  <img class="img-responsive" src="{{data}}{{href}}"><br>
+                  <i class="fas fa-image"></i> {{#if href}}<a href="{{href}}">{{/if}}<span class="attachment-name">{{name}}</span>{{#if href}}</a>{{/if}}
+                {{else}}
+                  <i class="fas fa-file"></i> {{#if href}}<a href="{{href}}">{{/if}}<span class="attachment-name">{{name}}</span>{{#if href}}</a>{{/if}}
+                {{/if}}
+              </div>
+            {{/eachAttachment}}
+          </td>
+          {{!-- Requirement Status --}}
+          <td class="status-col highlight">
+            <em>{{status}}</em>
+          </td>
+          {{!-- Verification Links from TESTS --}}
+          <td class="links-col">
+            {{#eachInlinkWith type="verification"}}
+              <div class="link{{#if deleted}} deleted{{/if}}">
+                <span class="link-attr">{{status}}</span>
+                <i class='fas fa-caret-left'></i> <span class="doc-obj-id">{{docObjId}}</span> {{#ifSuspect}}<span class="suspect-flag"><i class="fas fa-exclamation-circle"></i></span>{{/ifSuspect}} <strong>{{shortDescription maxLength=40}}</strong>
+              </div>
+            {{/eachInlinkWith}}
+          </td>
+        </tr>
+        {{/eachDocumentObject}}
+      </tbody>
+    </table>
+    <div id="footer">
+      <hr>
+      <div class="pull-right"><em>Last modified by {{#with lastChangedBy}}<a href="mailto://{{email}}">{{name}}{{#if name}}, {{company}}{{else}} {{company}}{{/if}}</a>{{/with}} on {{formatDateTime lastChangedOn}}</em></div>
+    </div>
+  </div>
+</body>
+</html>

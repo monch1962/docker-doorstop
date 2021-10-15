@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head><title>Doorstop</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="assets/doorstop/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/doorstop/general.css" />
+  <link type="text/css" rel="stylesheet" href="assets/doorstop/sidebar.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+  });
+  </script>
+</head>
+<body>
+
+  <h2>Dependency tree: {{dependency_tree|e}}</h2>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 hidden-sm hidden-xs">
+          <nav id="TOC" class="nav nav-stacked fixed sidebar">
+              <h3>Table of Contents</h3>
+<ul>
+<li><a href="#REQ-DOTINFOSEC001">1.0 REQ-DOTINFOSEC001</a><ul>
+<li><a href="#REQ-DOTINFOSEC002">1.1 REQ-DOTINFOSEC002</a></li>
+<li><a href="#REQ-DOTINFOSEC003">1.2 REQ-DOTINFOSEC003</a></li>
+<li><a href="#REQ-DOTINFOSEC004">1.3 REQ-DOTINFOSEC004</a></li>
+<li><a href="#REQ-DOTINFOSEC005">1.4 REQ-DOTINFOSEC005</a></li>
+<li><a href="#REQ-DOTINFOSEC006">1.5 REQ-DOTINFOSEC006</a></li>
+<li><a href="#REQ-DOTINFOSEC007">1.6 REQ-DOTINFOSEC007</a></li>
+<li><a href="#REQ-DOTINFOSEC008">1.7 REQ-DOTINFOSEC008</a></li>
+<li><a href="#REQ-DOTINFOSEC009">1.8 REQ-DOTINFOSEC009</a></li>
+<li><a href="#REQ-DOTINFOSEC010">1.9 REQ-DOTINFOSEC010</a></li>
+<li><a href="#REQ-DOTINFOSEC011">1.10 REQ-DOTINFOSEC011</a></li>
+<li><a href="#REQ-DOTINFOSEC012">1.11 REQ-DOTINFOSEC012</a></li>
+</ul>
+</li>
+</ul>
+          </nav>
+      </div>
+      <div class="col-lg-8" id="main">
+        <h1 id="REQ-DOTINFOSEC001">1.0 REQ-DOTINFOSEC001</h1>
+<h2 id="REQ-DOTINFOSEC002">1.1 REQ-DOTINFOSEC002</h2>
+<h2 id="REQ-DOTINFOSEC003">1.2 REQ-DOTINFOSEC003</h2>
+<h2 id="REQ-DOTINFOSEC004">1.3 REQ-DOTINFOSEC004</h2>
+<h2 id="REQ-DOTINFOSEC005">1.4 REQ-DOTINFOSEC005</h2>
+<h2 id="REQ-DOTINFOSEC006">1.5 REQ-DOTINFOSEC006</h2>
+<h2 id="REQ-DOTINFOSEC007">1.6 REQ-DOTINFOSEC007</h2>
+<h2 id="REQ-DOTINFOSEC008">1.7 REQ-DOTINFOSEC008</h2>
+<h2 id="REQ-DOTINFOSEC009">1.8 REQ-DOTINFOSEC009</h2>
+<h2 id="REQ-DOTINFOSEC010">1.9 REQ-DOTINFOSEC010</h2>
+<h2 id="REQ-DOTINFOSEC011">1.10 REQ-DOTINFOSEC011</h2>
+<h2 id="REQ-DOTINFOSEC012">1.11 REQ-DOTINFOSEC012</h2>
+      </div>
+    </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="assets/doorstop/jquery.min.js"></script>
+<script src="assets/doorstop/bootstrap.min.js"></script>
+<script>
+    $(function() {
+        $("table").addClass("table");
+        $("nav ul").addClass("nav nav-stacked");
+        $("nav").affix();
+        $('body').scrollspy({
+          target: '.sidebar'
+        });
+        $("#main a").attr("target", "parent");
+
+  $(window).on('hashchange', function() {
+    $(window).scrollTop($(location.hash.toLowerCase()).offset().top);});
+  });
+</script>
+</body>
+</html>
+

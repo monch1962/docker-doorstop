@@ -6,5 +6,12 @@ from jinja2 import Template
 tree = doorstop.build()
 print(repr(tree))
 
-for issue in tree.issues:
-    print(issue)
+t = Template("This is the structure of these Doorstop files {{something}}!")
+print(t.render(something=repr(tree)))
+
+with open("./templates/report.html.jinja2", "r") as f:
+    t = Template(f.read())
+output = t.render(dependency_tree=repr(tree))
+
+with open("./dist/rendered.html", "w") as f:
+    f.write(output)
