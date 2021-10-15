@@ -1,7 +1,7 @@
 doorstop create -d 5 -s - REQ ./items/reqs
 
 # Add new fields for requirement category & requirement source
-yq eval -i 'with(.attributes.defaults; .categories = ["functional", "usability", "reliability", "performance", "security", "constraint"], .requirement-source = "" lineComment="Source for the requirement", .requirement-url = "")' ./items/reqs/.doorstop.yml
+yq eval -i 'with(.attributes.defaults; .categories = ["functional", "usability", "reliability", "performance", "security", "design-constraint", "implementation-constraint", "interface-constraint", "physical-constraint"], .requirement-source = "" lineComment="Source for the requirement", .requirement-url = "")' ./items/reqs/.doorstop.yml
 yq eval -i '.attributes.defaults.categories lineComment="Remove the categories that do not apply to this requirement"' ./items/reqs/.doorstop.yml
 yq eval -i '.attributes.defaults.requirement-source lineComment="Describe the source for this requirement (e.g. client, regulator, Deloitte best practice)"' ./items/reqs/.doorstop.yml
 yq eval -i '.attributes.defaults.requirement-url lineComment="Provide a link to the source document for this requirement"' ./items/reqs/.doorstop.yml

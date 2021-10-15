@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+import doorstop
+
+tree = doorstop.build()
+print(repr(tree))
+
+for issue in tree.issues:
+    print(issue)

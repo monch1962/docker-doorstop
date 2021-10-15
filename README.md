@@ -139,3 +139,4 @@ You should be able to navigate around by clicking on links in that page
 
 ## TO-DOs
 - investigate integration with https://github.com/sevendays/doorhole which looks like a nice GUI for rapid data entry and editing
+- add functions to delete, add, edit custom fields in Doorstop YAMLs
