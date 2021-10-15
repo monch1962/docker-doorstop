@@ -18,8 +18,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 #COPY doorhole.py .
+COPY doorstop-validator /usr/local/bin/
+COPY doorstop-reporter /usr/local/bin/
 
 WORKDIR /data
-
 EXPOSE 7867
 ENTRYPOINT ["/bin/bash"]
