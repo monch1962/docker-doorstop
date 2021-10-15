@@ -7,6 +7,7 @@ et-xmlfile==1.1.0
 httplib2==0.20.1
 idna==3.2
 jdcal==1.4.1
+jinja-markdown==1.210911
 Jinja2==3.0.2
 Markdown==3.3.4
 MarkupSafe==2.0.1
@@ -15,6 +16,7 @@ plantuml==0.3.0
 plantuml-markdown==3.4.3
 pyficache==0.3.2
 Pygments==2.10.0
+pymdown-extensions==9.0
 pyparsing==2.4.7
 pystache==0.5.4
 python-markdown-math==0.6
