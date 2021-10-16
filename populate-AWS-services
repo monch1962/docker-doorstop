@@ -14,7 +14,7 @@ doorstop add -n AWSCOGNITO SVC
 
 # Populate descriptions
 DS_PATH='./items/svcs'
-AWSS3DESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # Amazon S3
   ## Object storage built to store and retrieve any amount of data from anywhere
@@ -24,9 +24,9 @@ AWSS3DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/s3/>
 END
 ) \
-yq eval -i '.text = env(AWSS3DESCRIPTION)' $DS_PATH/SVC-AWSS3.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSS3.yml
 
-AWSRDSDESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # Amazon Relational Database Service (RDS)
   ## Set up, operate, and scale a relational database in the cloud with just a few clicks.
@@ -36,9 +36,9 @@ AWSRDSDESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/rds/>
 END
 ) \
-yq eval -i '.text = env(AWSRDSDESCRIPTION)' $DS_PATH//SVC-AWSRDS.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSRDS.yml
 
-AWSFARGATEDESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # AWS Fargate
   ## Serverless compute for containers
@@ -54,9 +54,9 @@ AWSFARGATEDESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/fargate/>
 END
 ) \
-yq eval -i '.text = env(AWSFARGATEDESCRIPTION)' $DS_PATH/SVC-AWSFARGATE.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSFARGATE.yml
 
-DESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # Amazon Elastic Kubernetes Service (EKS)
   ## The most trusted way to start, run, and scale Kubernetes
@@ -68,9 +68,9 @@ DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/eks/>
 END
 ) \
-yq eval -i '.text = env(DESCRIPTION)' $DS_PATH/SVC-AWSEKS.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSEKS.yml
 
-DESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # Elastic Load Balancing
   ## Distribute network traffic to improve application scalability
@@ -82,9 +82,9 @@ DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/elasticloadbalancing/>
 END
 ) \
-yq eval -i '.text = env(DESCRIPTION)' $DS_PATH/SVC-AWSALB.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSALB.yml
 
-DESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # AWS Lambda
   ## Run code without thinking about servers or clusters
@@ -97,9 +97,9 @@ DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/lambda/>
 END
 ) \
-yq eval -i '.text = env(DESCRIPTION)' $DS_PATH/SVC-AWSLAMBDA.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSLAMBDA.yml
 
-DESCRIPTION=$(cat <<-END
+SVCDESCRIPTION=$(cat <<-END
 |
   # Amazon API Gateway
   ## Create, maintain, and secure APIs at any scale
@@ -111,9 +111,10 @@ DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/api-gateway/>
 END
 ) \
-yq eval -i '.text = env(DESCRIPTION)' $DS_PATH/SVC-AWSAPIGATEWAY.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' $DS_PATH/SVC-AWSAPIGATEWAY.yml
 
-DESCRIPTION=$(cat <<-END
+SVCNAME='AWSNEPTUNE'
+SVCDESCRIPTION=$(cat <<-END
 |
   # Amazon Neptune
   ## Build and run graph applications with highly connected datasets
@@ -125,9 +126,10 @@ DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/neptune/>
 END
 ) \
-yq eval -i '.text = env(DESCRIPTION)' $DS_PATH/SVC-AWSNEPTUNE.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
 
-DESCRIPTION=$(cat <<-END
+SVCNAME='AWSCOGNITO'
+SVCDESCRIPTION=$(cat <<-END
 |
   # Amazon Cognito
   ## Simple and Secure User Sign-Up, Sign-In, and Access Control
@@ -137,4 +139,4 @@ DESCRIPTION=$(cat <<-END
   <https://aws.amazon.com/cognito/>
 END
 ) \
-yq eval -i '.text = env(DESCRIPTION)' $DS_PATH/SVC-AWSCOGNITO.yml
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml

@@ -12,7 +12,7 @@ DS_PATH='./items/svcs'
 doorstop create -d 5 -s - SVC $DS_PATH --parent REQ
 
 DS_PATH='./items/svcs/service-vendor-docs'
-doorstop create -d 5 -s - SVCDOC $DS_PATH --parent SVC
+doorstop create -d 5 -s - VENDORDOC $DS_PATH --parent SVC
 yq eval -i '.attributes.defaults.provider-info-url lineComment="Link to provider doc that describes how a requirement is met"' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.description lineComment="Description of how the link confirms the requirement has been met"' $DS_PATH/.doorstop.yml
 
