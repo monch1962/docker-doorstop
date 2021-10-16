@@ -1,0 +1,25 @@
+mkdir ./items
+DS_PATH='./items/reqs'
+doorstop create -d 5 -s - REQ $DS_PATH
+
+# Add new fields for requirement category & requirement source
+yq eval -i '.attributes.defaults.categories = ["functional", "usability", "reliability", "performance", "security", "design-constraint", "implementation-constraint", "interface-constraint", "physical-constraint"]' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.categories[] lineComment="Comment out this category if it does not apply to this requirement"' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.requirement-source lineComment="Describe the source for this requirement (e.g. client, regulator, Deloitte best practice)"' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.requirement-url lineComment="Provide a link to the source document for this requirement"' $DS_PATH/.doorstop.yml
+
+DS_PATH='./items/svcs'
+doorstop create -d 5 -s - SVC $DS_PATH --parent REQ
+
+DS_PATH='./items/svcs/service-vendor-docs'
+doorstop create -d 5 -s - SVCDOC $DS_PATH --parent SVC
+yq eval -i '.attributes.defaults.provider-info-url lineComment="Link to provider doc that describes how a requirement is met"' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.description lineComment="Description of how the link confirms the requirement has been met"' $DS_PATH/.doorstop.yml
+
+DS_PATH='./items/instances'
+doorstop create -d 5 -s - INSTANCE $DS_PATH --parent SVC
+
+DS_PATH='./items/instances/tests'
+doorstop create -d 6 -s - INSTANCETEST $DS_PATH --parent INSTANCE
+yq eval -i '.attributes.defaults.url lineComment="URL for a test case, Terraform, CloudFormation or similar artifact that confirms the requirement has been met"' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.description lineComment="Description of how the URL confirms the requirement has been met"' $DS_PATH/.doorstop.yml

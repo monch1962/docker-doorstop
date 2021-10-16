@@ -1,16 +1,37 @@
 #!/usr/bin/env python
 
+import argparse
 import doorstop
-from jinja2 import Template
+import sys
+from jinja2 import Template, Environment, nodes
+
+from jinja_markdown import MarkdownExtension
+
+parser = argparse.ArgumentParser(
+    description="Render a template from the Doorstop content")
+parser.add_argument("-t", "--template",
+                    help="Specify the Jinja template you wish to use")
+# parser.parse_args()
+args = parser.parse_args()
+if args.template == None:
+    print("Expecting a Jinja template to be supplied via --template", file=sys.stderr)
+    sys.exit(1)
 
 tree = doorstop.build()
 print(repr(tree))
 
+# This approach works for base Jinja, without extensions
 t = Template("This is the structure of these Doorstop files {{something}}!")
 print(t.render(something=repr(tree)))
 
-with open("./templates/report.html.jinja2", "r") as f:
-    t = Template(f.read())
+# with open("./templates/report.html.jinja2", "r") as f:
+with open(args.template, "r") as f:
+    # This would work if you didn't have to load a Jinja extension i.e. MarkdownExtension
+    #t = Template(f.read())
+
+    # This is the approach to consume a template that includes {% markdown %}..{% endmarkdown %} tags
+    s = f.read()
+    t = Environment(extensions=[MarkdownExtension]).from_string(s)
 output = t.render(dependency_tree=repr(tree))
 
 with open("./dist/rendered.html", "w") as f:
