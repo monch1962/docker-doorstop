@@ -7,6 +7,16 @@ yq eval -i '.attributes.defaults.categories = ["functional", "usability", "relia
 yq eval -i '.attributes.defaults.categories[] lineComment="Comment out this category if it does not apply to this requirement"' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.requirement-source lineComment="Describe the source for this requirement (e.g. client, regulator, Deloitte best practice)"' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.requirement-url lineComment="Provide a link to the source document for this requirement"' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.interpretation lineComment="If appropriate, describe your interpretation of the requirement in the context of the project"' $DS_PATH/.doorstop.yml
+
+DS_PATH='./items/process'
+doorstop create -d 5 -s - PROCESS $DS_PATH --parent REQ
+
+DS_PATH='./items/people'
+doorstop create -d 5 -s - PEOPLE $DS_PATH --parent REQ
+
+DS_PATH='./items/design'
+doorstop create -d 5 -s - DESIGN $DS_PATH --parent REQ
 
 DS_PATH='./items/svcs'
 doorstop create -d 5 -s - SVC $DS_PATH --parent REQ
