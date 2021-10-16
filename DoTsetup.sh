@@ -64,16 +64,17 @@ END
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/DESIGN-${SVCNAME}.yml
 
 
-# Add high-level design principles
+# Add high-level delivery processes
 doorstop add -n CODEMERGE PROCESS
 
-
+DS_PATH='./items/process'
 SVCNAME='CODEMERGE'
 SVCDESCRIPTION=$(cat <<-END
 |
   # Code merging
   ## Using a standard version control tool & process
 
+  <https://>
 END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/PROCESS-${SVCNAME}.yml
