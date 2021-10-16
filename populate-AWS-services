@@ -1,16 +1,23 @@
 # Create services - these will fail if the service already exists
+doorstop add -n AWS SVC
 doorstop add -n AWSRDS SVC
 doorstop add -n AWSFARGATE SVC
 doorstop add -n AWSS3 SVC
 doorstop add -n AWSEKS SVC
 doorstop add -n AWSALB SVC
-doorstop add -n AWSNLB SVC
 doorstop add -n AWSLAMBDA SVC
 doorstop add -n AWSAPIGATEWAY SVC
 doorstop add -n AWSAVAILABILITYZONE SVC
 doorstop add -n AWSREGION SVC
 doorstop add -n AWSNEPTUNE SVC
 doorstop add -n AWSCOGNITO SVC
+doorstop add -n AWSSAGEMAKER SVC
+doorstop add -n AWSDYNAMODB SVC
+doorstop add -n AWSELASTICACHE SVC
+doorstop add -n AWSSECRETSMANAGER SVC
+doorstop add -n AWSWAF SVC
+doorstop add -n AWSNETWORKFIREWALL SVC
+doorstop add -n AWSKMS SVC
 
 # Populate descriptions
 DS_PATH='./items/svcs'
@@ -137,6 +144,110 @@ SVCDESCRIPTION=$(cat <<-END
   Amazon Cognito lets you add user sign-up, sign-in, and access control to your web and mobile apps quickly and easily. Amazon Cognito scales to millions of users and supports sign-in with social identity providers, such as Apple, Facebook, Google, and Amazon, and enterprise identity providers via SAML 2.0 and OpenID Connect.  
   
   <https://aws.amazon.com/cognito/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSSAGEMAKER'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon SageMaker
+
+  Amazon SageMaker helps data scientists and developers to prepare, build, train, and deploy high-quality machine learning (ML) models quickly by bringing together a broad set of capabilities purpose-built for ML.
+  
+  <https://aws.amazon.com/sagemaker/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSDYNAMODB'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon DynamoDB
+  ## Fast, flexible NoSQL database service for single-digit millisecond performance at any scale
+
+  Deliver apps with consistent single-digit millisecond performance, nearly unlimited throughput and storage, and automatic multi-region replication.
+  Secure your data with encryption at rest, automatic backup and restore, and guaranteed reliability with an SLA of up to 99.999% availability.
+  Focus on innovation and optimize costs with a fully managed serverless database that automatically scales up and down to fit your needs.
+  Integrate with AWS services to do more with your data. Use built-in tools to perform analytics, extract insights, and monitor traffic trends.
+  
+  
+  <https://aws.amazon.com/dynamodb/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSELASTICACHE'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon ElastiCache
+  ## Unlock microsecond latency and scale with in-memory caching
+
+  Boost application performance, reducing latency to microseconds.
+  Scale with just a few clicks to meet the needs of your most demanding, internet-scale applications.
+  Reduce costs and eliminate the operational overhead of self-managed caching.
+  Build with your choice of Redis or Memcached, two popular open-source caching technologies.
+  
+  
+  <https://aws.amazon.com/elasticache/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSSECRETSMANAGER'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS Secrets Manager Documentation
+
+  AWS Secrets Manager helps you to securely encrypt, store, and retrieve credentials for your databases and other services. Instead of hardcoding credentials in your apps, you can make calls to Secrets Manager to retrieve your credentials whenever needed. Secrets Manager helps you protect access to your IT resources and data by enabling you to rotate and manage access to your secrets.
+  
+  
+  <https://aws.amazon.com/secretsmanager/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSWAF'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS WAF Documentation
+
+  AWS WAF is a web application firewall that lets you monitor web requests that are forwarded to Amazon CloudFront distributions or an Application Load Balancer. You can also use AWS WAF to block or allow requests based on conditions that you specify, such as the IP addresses that requests originate from or values in the requests.
+  
+  
+  <https://aws.amazon.com/waf/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSNETWORKFIREWALL'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS Network Firewall
+  ## Deploy network security across your Amazon VPCs with just a few clicks
+
+  AWS Network Firewall is a managed service that makes it easy to deploy essential network protections for all of your Amazon Virtual Private Clouds (VPCs). The service can be setup with just a few clicks and scales automatically with your network traffic, so you don't have to worry about deploying and managing any infrastructure. AWS Network Firewall’s flexible rules engine lets you define firewall rules that give you fine-grained control over network traffic, such as blocking outbound Server Message Block (SMB) requests to prevent the spread of malicious activity. You can also import rules you’ve already written in common open source rule formats as well as enable integrations with managed intelligence feeds sourced by AWS partners. AWS Network Firewall works together with AWS Firewall Manager so you can build policies based on AWS Network Firewall rules and then centrally apply those policies across your VPCs and accounts.
+
+  AWS Network Firewall includes features that provide protections from common network threats. AWS Network Firewall’s stateful firewall can incorporate context from traffic flows, like tracking connections and protocol identification, to enforce policies such as preventing your VPCs from accessing domains using an unauthorized protocol. AWS Network Firewall’s intrusion prevention system (IPS) provides active traffic flow inspection so you can identify and block vulnerability exploits using signature-based detection. AWS Network Firewall also offers web filtering that can stop traffic to known bad URLs and monitor fully qualified domain names.
+
+  It’s easy to get started with AWS Network Firewall by visiting the Amazon VPC Console to create or import your firewall rules, group them into policies, and apply them to the VPCs you want to protect. AWS Network Firewall pricing is based on the number of firewalls deployed and the amount of traffic inspected. There are no upfront commitments and you pay only for what you use.
+  
+  
+  <https://aws.amazon.com/network-firewall/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSKMS'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS Key Management Service (KMS)
+  ## Easily create and control the keys used to encrypt or digitally sign your data
+
+  AWS Key Management Service (KMS) makes it easy for you to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications. AWS KMS is a secure and resilient service that uses hardware security modules that have been validated under FIPS 140-2, or are in the process of being validated, to protect your keys. AWS KMS is integrated with AWS CloudTrail to provide you with logs of all key usage to help meet your regulatory and compliance needs.
+  
+  
+  <https://aws.amazon.com/kms/>
 END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
