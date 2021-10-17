@@ -18,6 +18,18 @@ doorstop add -n AWSSECRETSMANAGER SVC
 doorstop add -n AWSWAF SVC
 doorstop add -n AWSNETWORKFIREWALL SVC
 doorstop add -n AWSKMS SVC
+doorstop add -n AWSCLOUDWATCH SVC
+doorstop add -n AWSCODEBUILD SVC
+doorstop add -n AWSCODEPIPELINE SVC
+doorstop add -n AWSXRAY SVC
+doorstop add -n AWSCLOUDFRONT SVC
+doorstop add -n AWSROUTE53 SVC
+doorstop add -n AWSVPC SVC
+doorstop add -n AWSVPN SVC
+doorstop add -n AWSSNS SVC
+doorstop add -n AWSKINESIS SVC
+doorstop add -n AWSSQS SVC
+doorstop add -n AWSSTEPFUNCTIONS SVC
 
 # Populate descriptions
 DS_PATH='./items/svcs'
@@ -248,6 +260,180 @@ SVCDESCRIPTION=$(cat <<-END
   
   
   <https://aws.amazon.com/kms/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+
+SVCNAME='AWSCLOUDWATCH'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon CloudWatch
+  ## Observability of your AWS resources and applications on AWS and on-premises
+
+  Amazon CloudWatch is a monitoring and observability service built for DevOps engineers, developers, site reliability engineers (SREs), and IT managers. CloudWatch provides you with data and actionable insights to monitor your applications, respond to system-wide performance changes, optimize resource utilization, and get a unified view of operational health. CloudWatch collects monitoring and operational data in the form of logs, metrics, and events, providing you with a unified view of AWS resources, applications, and services that run on AWS and on-premises servers. You can use CloudWatch to detect anomalous behavior in your environments, set alarms, visualize logs and metrics side by side, take automated actions, troubleshoot issues, and discover insights to keep your applications
+running smoothly.
+  
+  <https://aws.amazon.com/cloudwatch/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+
+SVCNAME='AWSCODEBUILD'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS CodeBuild
+  ## Build and test code with continuous scaling. Pay only for the build time you use.
+
+  AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy. With CodeBuild, you don’t need to provision, manage, and scale your own build servers. CodeBuild scales continuously and processes multiple builds concurrently, so your builds are not left waiting in a queue. You can get started quickly by using prepackaged build environments, or you can create custom build environments that use your own build tools. With CodeBuild, you are charged by the minute for the compute resources you use.
+  
+  <https://aws.amazon.com/codebuild/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSCODEPIPELINE'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS CodePipeline
+  ## Automate continuous delivery pipelines for fast and reliable updates
+
+  AWS CodePipeline is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates. CodePipeline automates the build, test, and deploy phases of your release process every time there is a code change, based on the release model you define. This enables you to rapidly and reliably deliver features and updates. You can easily integrate AWS CodePipeline with third-party services such as GitHub or with your own custom plugin. With AWS CodePipeline, you only pay for what you use. There are no upfront fees or long-term commitments.
+  
+  <https://aws.amazon.com/codepipeline/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSXRAY'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS X-Ray
+  ## Automate continuous delivery pipelines for fast and reliable updates
+
+  AWS X-Ray helps developers analyze and debug production, distributed applications, such as those built using a microservices architecture. With X-Ray, you can understand how your application and its underlying services are performing to identify and troubleshoot the root cause of performance issues and errors. X-Ray provides an end-to-end view of requests as they travel through your application, and shows a map of your application’s underlying components. You can use X-Ray to analyze both applications in development and in production, from simple three-tier applications to complex microservices applications consisting of thousands of services.
+  
+  <https://aws.amazon.com/xray/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSCLOUDFRONT'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon CloudFront
+  ## Securely deliver content with low latency and high transfer speeds
+
+  Reduce latency by delivering data through 275+ globally dispersed points of presence (PoPs) with automated network mapping and intelligent routing.
+  Improve security with traffic encryption and access controls, and use AWS Shield Standard to defend against DDoS attacks at no additional charge.
+  Cut costs with consolidated requests, customizable pricing options, and zero fees for data transfer out from AWS origins.
+  Customize the code you run at the AWS content delivery network (CDN) edge using serverless compute features to balance cost, performance, and security.
+  
+  <https://aws.amazon.com/cloudfront/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSROUTE53'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon Route 53
+  ## A reliable and cost-effective way to route end users to Internet applications
+
+  Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost effective way to route end users to Internet applications by translating names like www.example.com into the numeric IP addresses like 192.0.2.1 that computers use to connect to each other. Amazon Route 53 is fully compliant with IPv6 as well.
+
+  Amazon Route 53 effectively connects user requests to infrastructure running in AWS – such as Amazon EC2 instances, Elastic Load Balancing load balancers, or Amazon S3 buckets – and can also be used to route users to infrastructure outside of AWS. You can use Amazon Route 53 to configure DNS health checks, then continuously monitor your applications’ ability to recover from failures and control application recovery with Route 53 Application Recovery Controller.
+
+  Amazon Route 53 Traffic Flow makes it easy for you to manage traffic globally through a variety of routing types, including Latency Based Routing, Geo DNS, Geoproximity, and Weighted Round Robin—all of which can be combined with DNS Failover in order to enable a variety of low-latency, fault-tolerant architectures. Using Amazon Route 53 Traffic Flow’s simple visual editor, you can easily manage how your end-users are routed to your application’s endpoints—whether in a single AWS region or distributed around the globe. Amazon Route 53 also offers Domain Name Registration – you can purchase and manage domain names such as example.com and Amazon Route 53 will automatically configure DNS settings for your domains.
+  
+  <https://aws.amazon.com/route53/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSVPC'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon Virtual Private Cloud (VPC)
+  ## Define and launch AWS resources in a logically isolated virtual network
+
+  Secure and monitor connections, screen traffic, and restrict instance access inside your virtual network.
+  Spend less time setting up, managing, and validating your virtual network, and concentrate on building the applications that run within it.
+  Customize your virtual networking environment by choosing your own IP address range, creating subnets, and configuring route tables.
+  
+  <https://aws.amazon.com/vpc/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSVPN'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS VPN
+  ## Extend your on-premises networks to the cloud and securely access them from anywhere
+
+  AWS Virtual Private Network solutions establish secure connections between your on-premises networks, remote offices, client devices, and the AWS global network. AWS VPN is comprised of two services: AWS Site-to-Site VPN and AWS Client VPN. Each service provides a highly-available, managed, and elastic cloud VPN solution to protect your network traffic.
+
+  AWS Site-to-Site VPN creates encrypted tunnels between your network and your Amazon Virtual Private Clouds or AWS Transit Gateways. For managing remote access, AWS Client VPN connects your users to AWS or on-premises resources using a VPN software client.
+  
+  <https://aws.amazon.com/vpn/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSSNS'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon Simple Notification Service
+  ## Fully managed pub/sub messaging, SMS, email, and mobile push notifications
+
+  Amazon Simple Notification Service (Amazon SNS) is a fully managed messaging service for both application-to-application (A2A) and application-to-person (A2P) communication.
+
+  The A2A pub/sub functionality provides topics for high-throughput, push-based, many-to-many messaging between distributed systems, microservices, and event-driven serverless applications. Using Amazon SNS topics, your publisher systems can fanout messages to a large number of subscriber systems including Amazon SQS queues, AWS Lambda functions and HTTPS endpoints, for parallel processing, and Amazon Kinesis Data Firehose. The A2P functionality enables you to send messages to users at scale via SMS, mobile push, and email.
+  
+  <https://aws.amazon.com/sns/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSKINESIS'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon Kinesis
+  ## Easily collect, process, and analyze video and data streams in real time
+
+  Amazon Kinesis makes it easy to collect, process, and analyze real-time, streaming data so you can get timely insights and react quickly to new information. Amazon Kinesis offers key capabilities to cost-effectively process streaming data at any scale, along with the flexibility to choose the tools that best suit the requirements of your application. With Amazon Kinesis, you can ingest real-time data such as video, audio, application logs, website clickstreams, and IoT telemetry data for machine learning, analytics, and other applications. Amazon Kinesis enables you to process and analyze data as it arrives and respond instantly instead of having to wait until all your data is collected before the processing can begin.
+  
+  <https://aws.amazon.com/kinesis/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSSQS'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Amazon Simple Queue Service
+  ## Fully managed message queues for microservices, distributed systems, and serverless applications
+
+  Amazon Simple Queue Service (SQS) is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications. SQS eliminates the complexity and overhead associated with managing and operating message-oriented middleware, and empowers developers to focus on differentiating work. Using SQS, you can send, store, and receive messages between software components at any volume, without losing messages or requiring other services to be available. Get started with SQS in minutes using the AWS console, Command Line Interface or SDK of your choice, and three simple commands.
+
+  SQS offers two types of message queues. Standard queues offer maximum throughput, best-effort ordering, and at-least-once delivery. SQS FIFO queues are designed to guarantee that messages are processed exactly once, in the exact order that they are sent.
+  
+  <https://aws.amazon.com/sqs/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSSTEPFUNCTIONS'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS Step Functions
+  ## Visual workflows for modern applications
+
+  AWS Step Functions is a low-code visual workflow service used to orchestrate AWS services, automate business processes, and build serverless applications. Workflows manage failures, retries, parallelization, service integrations, and observability so developers can focus on higher-value business logic.
+  
+  <https://aws.amazon.com/step-functions/>
 END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
