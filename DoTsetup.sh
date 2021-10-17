@@ -27,13 +27,15 @@ doorstop add -n ID123 INSTANCE
 doorstop link INSTANCE-ID123 SVC-AWSRDS
 doorstop add -n ID124 INSTANCE
 doorstop link INSTANCE-ID124 SVC-AWSFARGATE
+doorstop add -n ID124 INSTANCE
+doorstop link INSTANCE-ID124 SVC-S3
 
 # Add high-level design principles
-doorstop add -n HIGHAVAILABILITY DESIGN
-doorstop add -n DATASOVEREIGNTY DESIGN
+doorstop add -n AWSHIGHAVAILABILITY DESIGN
+doorstop add -n AWSDATASOVEREIGNTY DESIGN
 
 DS_PATH='./items/design'
-SVCNAME='HIGHAVAILABILITY'
+SVCNAME='AWSHIGHAVAILABILITY'
 SVCDESCRIPTION=$(cat <<-END
 |
   # High availability
@@ -47,7 +49,7 @@ END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/DESIGN-${SVCNAME}.yml
 
-SVCNAME='DATASOVEREIGNTY'
+SVCNAME='AWSDATASOVEREIGNTY'
 SVCDESCRIPTION=$(cat <<-END
 |
   # Data sovereignty
