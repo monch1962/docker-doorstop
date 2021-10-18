@@ -135,10 +135,35 @@ If you've published your documents as a web page inside Github, you can view and
 - prepend `http://htmlpreview.github.io/?` to the URL for the page, and you'll then see the rendered view of the page
 You should be able to navigate around by clicking on links in that page
 
+### Using doorstop-gui on a Mac from inside Docker
+
+Challenge is that doorstop-gui uses tkinter and X-Windows to display its UI. Macs don't include X-Windows by default
+
+To use this feature, you need to take the following steps:
+
+`$ brew install socat`
+
+`$ brew cask install xquartz`
+
+`$ open -a XQuartz`
+
+`$ socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"`
+
+Then, in another shell:
+
+`$ MYIP=$(ifconfig getifaddr en0)`
+`$ docker run --name doorstop -e DISPLAY=$MYIP:0 -v /tmp/.X11-unix:/tmp/.X11-unix --rm -v "$(pwd)/data:/data" -p 7867:7867 -it doorstop_image`
+
+`# doorstop-gui`
+
+### Useful links
+
+- https://nbviewer.org/gist/jacebrowning/9754157 contains some samples of how to use Doorstop's scripting interface
+  
 ---
 
 ## TO-DOs
 - investigate integration with https://github.com/sevendays/doorhole which looks like a nice GUI for rapid data entry and editing
 - add functions to delete, add, edit custom fields in Doorstop YAMLs
 - add tool to report on any compliance gaps
-- add tool to create custom reports using modifiable templates
+- ~add tool to create custom reports using modifiable templates~ (implemented using `./doorstop-reporter`)
