@@ -2,12 +2,14 @@ mkdir ./items
 DS_PATH='./items/reqs'
 doorstop create -d 5 -s - REQ $DS_PATH
 
-# Add new fields for requirement category & requirement source
+# Add new fields for requirement
 yq eval -i '.attributes.defaults.categories = ["functional", "usability", "reliability", "performance", "security", "design-constraint", "implementation-constraint", "interface-constraint", "physical-constraint"]' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.categories[] lineComment="Comment out this category if it does not apply to this requirement"' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.requirement-source lineComment="Describe the source for this requirement (e.g. client, regulator, Deloitte best practice)"' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.requirement-url lineComment="Provide a link to the source document for this requirement"' $DS_PATH/.doorstop.yml
 yq eval -i '.attributes.defaults.interpretation lineComment="If appropriate, describe your interpretation of the requirement in the context of the project"' $DS_PATH/.doorstop.yml
+yq eval -i '.attributes.defaults.responsibility lineComment="Who is responsible for ensuring this requirement is met"' $DS_PATH/.doorstop.yml
+
 
 DS_PATH='./items/process'
 doorstop create -d 5 -s - PROCESS $DS_PATH --parent REQ
