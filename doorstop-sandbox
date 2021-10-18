@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+import doorstop
+import yaml
+
+tree = doorstop.build()
+
+print(tree.__dict__)
+
+for item in tree:
+    print(item)
+    print(item._data['prefix'])
+    for i in item:
+        print("  " + repr(i))
+        print()
+        print("  " + repr(i.__dict__))
+        print()
+        print("  " + repr(i._data))
+        print()
+        print("  " + repr(i.tree))
+        print()
+        print("  " + repr(i.document))
+        print()
+        print("  " + i.path)
+        print()
+        with open(i.path, "r") as f:
+            y = yaml.safe_load(f)
+            print("    " + repr(y))
+
+        print("  --------")
+    print("-------------")
