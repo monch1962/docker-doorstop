@@ -30,6 +30,7 @@ doorstop add -n AWSSNS SVC
 doorstop add -n AWSKINESIS SVC
 doorstop add -n AWSSQS SVC
 doorstop add -n AWSSTEPFUNCTIONS SVC
+doorstop add -n AWSDIRECTCONNECT SVC
 
 # Populate descriptions
 DS_PATH='./items/svcs'
@@ -434,6 +435,21 @@ SVCDESCRIPTION=$(cat <<-END
   AWS Step Functions is a low-code visual workflow service used to orchestrate AWS services, automate business processes, and build serverless applications. Workflows manage failures, retries, parallelization, service integrations, and observability so developers can focus on higher-value business logic.
   
   <https://aws.amazon.com/step-functions/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml
+
+SVCNAME='AWSDIRECTCONNECT'
+SVCDESCRIPTION=$(cat <<-END
+|
+  # AWS Direct Connect
+  ## Create a dedicated network connection to AWS
+
+  Improve application performance by connecting directly to AWS and bypassing the public internet.
+  Secure your data as it moves between your network and AWS with multiple encryption options.
+  Reduce your networking costs with low data transfer rates out of AWS.
+  
+  <https://aws.amazon.com/directconnect/>
 END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/SVC-${SVCNAME}.yml

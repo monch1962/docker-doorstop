@@ -1,6 +1,16 @@
 # Create requirements - these will fail if the service already exists
 DS_PATH='./items/reqs'
 
+REQNAME='DOTINFOSEC000'
+doorstop add -n $REQNAME REQ
+
+SVCDESCRIPTION=$(cat <<-END
+|
+  # DoT Information Security document
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/REQ-${REQNAME}.yml
+
 REQNAME='DOTINFOSEC001'
 doorstop add -n $REQNAME REQ
 
@@ -249,6 +259,16 @@ doorstop add -n AWSHIGHAVAILABILITY DESIGN
 doorstop add -n AWSDATASOVEREIGNTY DESIGN
 
 DS_PATH='./items/design'
+SVCNAME='SOLUTIONDESIGN'
+doorstop add -n $SVCNAME DESIGN
+SVCDESCRIPTION=$(cat <<-END
+|
+
+  <https://>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/DESIGN-${SVCNAME}.yml
+
 SVCNAME='AWSHIGHAVAILABILITY'
 SVCDESCRIPTION=$(cat <<-END
 |
@@ -279,9 +299,32 @@ END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/DESIGN-${SVCNAME}.yml
 
+DS_PATH='./items/design'
+SVCNAME='AWSDATARETENTION'
+doorstop add -n $SVCNAME DESIGN
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Data retention
+  
+  Delivered through the following process
+
+  - data stored in RDS will be backed up via RDS' snapshot facility
+  - these RDS snapshots will be converted to flat files
+  - the flat files will then be encrypted using AWS CMEKs
+  - the encrypted flat files will be moved to AWS S3 Glacier for long term data storage
+  
+  
+  <https://aws.amazon.com/rds/>
+  <https://aws.amazon.com/s3/glacier/>
+  <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html>
+  <https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/DESIGN-${SVCNAME}.yml
 
 # Add high-level delivery processes
 doorstop add -n CODEMERGE PROCESS
+doorstop add -n SOURCECONTROL PROCESS
 
 DS_PATH='./items/process'
 SVCNAME='CODEMERGE'
@@ -291,6 +334,34 @@ SVCDESCRIPTION=$(cat <<-END
   ## Using a standard version control tool & process
 
   <https://>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/PROCESS-${SVCNAME}.yml
+
+DS_PATH='./items/process'
+SVCNAME='SOURCECONTROL'
+doorstop add -n $SVCNAME PROCESS
+SVCDESCRIPTION=$(cat <<-END
+|
+  # Source control
+  
+  Source code will be managed using git
+
+  Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+  Git is easy to learn and has a tiny footprint with lightning fast performance. It outclasses SCM tools like Subversion, CVS, Perforce, and ClearCase with features like cheap local branching, convenient staging areas, and multiple workflows.
+
+  <https://git-scm.com/>
+END
+) \
+yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/PROCESS-${SVCNAME}.yml
+
+DS_PATH='./items/process'
+SVCNAME='DELIVERYPROCESSES'
+doorstop add -n $SVCNAME PROCESS
+SVCDESCRIPTION=$(cat <<-END
+|
+  
 END
 ) \
 yq eval -i '.text = env(SVCDESCRIPTION)' ${DS_PATH}/PROCESS-${SVCNAME}.yml
