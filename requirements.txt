@@ -1,11 +1,15 @@
 bottle==0.12.19
 certifi==2021.10.8
 charset-normalizer==2.0.6
+click==8.0.3
 coverage==6.0.1
-doorstop==2.1.4
+#doorstop==2.1.4
+doorstop==2.2b5
 et-xmlfile==1.1.0
+Flask==2.0.2
 httplib2==0.20.1
 idna==3.2
+itsdangerous==2.0.1
 jdcal==1.4.1
 jinja-markdown==1.210911
 Jinja2==3.0.2
@@ -24,3 +28,4 @@ PyYAML==5.4.1
 requests==2.26.0
 six==1.16.0
 urllib3==1.26.7
+Werkzeug==2.0.2
