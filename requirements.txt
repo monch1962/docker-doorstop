@@ -8,7 +8,7 @@ doorstop==2.2b5
 et-xmlfile==1.1.0
 Flask==2.0.2
 httplib2==0.20.1
-idna==3.2
+idna==3.7
 itsdangerous==2.0.1
 jdcal==1.4.1
 jinja-markdown==1.210911
