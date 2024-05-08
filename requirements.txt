@@ -12,7 +12,7 @@ idna==3.2
 itsdangerous==2.0.1
 jdcal==1.4.1
 jinja-markdown==1.210911
-Jinja2==3.0.2
+Jinja2==3.1.4
 Markdown==3.3.4
 MarkupSafe==2.0.1
 openpyxl==2.6.4
